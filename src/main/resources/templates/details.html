@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Detailed Report</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .container {
+            background: #ffffff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #6a11cb;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #6a11cb;
+            color: white;
+        }
+
+        .update-btn {
+            text-decoration: none;
+            color: white;
+            background: #2575fc;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .update-btn:hover {
+            background: #6a11cb;
+        }
+
+        .links {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .links a {
+            text-decoration: none;
+            color: #6a11cb;
+            font-weight: bold;
+            margin: 0 10px;
+        }
+
+        .links a:hover {
+            color: #2575fc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Here is your detailed report</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Semester Number</th>
+                    <th>Number of Theory Papers</th>
+                    <th>Number of Practical Papers</th>
+                    <th>SGPA</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="sem : ${semesters}">
+                    <td th:text="${sem.semNo}"></td>
+                    <td th:text="${sem.noOfTheoryPaper}"></td>
+                    <td th:text="${sem.noOfPracticalPaper}"></td>
+                    <td th:text="${sem.sgpa}"></td>
+                    <td>
+                        <a th:href="@{/update/{semNo}(semNo=${sem.semNo})}" class="btn btn-warning">Update</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="links">
+            <a href="/">➕ Add Another Semester Details</a>
+            <a href="/show-result">📄 Check Your Result</a>
+        </div>
+    </div>
+</body>
+
+</html>
