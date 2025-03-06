@@ -29,7 +29,7 @@ public class SemesterServiceImpl implements ISemesterService {
 	    List<SemesterDetailsEntity> entities = repo.findAll();
 	    
 	    if (entities == null || entities.isEmpty()) { 
-	        return List.of();  // ✅ Return an empty list instead of null
+	        return List.of();  
 	    }
 
 	    return entities.stream().map(entity -> {
@@ -78,6 +78,9 @@ public class SemesterServiceImpl implements ISemesterService {
 	    repo.save(entity);
 	}
 
-
-
+	
+	@Override
+	public void deleteSemester(Integer semNo) {
+	    repo.deleteById(semNo);
+	}
 }

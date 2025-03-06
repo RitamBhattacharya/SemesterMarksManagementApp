@@ -58,6 +58,12 @@ public class SemesterController {
 	}
 
 
+	@PostMapping("/delete/{semNo}")
+	public String deleteSemester(@PathVariable Integer semNo) {
+	    service.deleteSemester(semNo);
+	    return "redirect:/detailed-report"; 
+	}
+
 
 	
 }

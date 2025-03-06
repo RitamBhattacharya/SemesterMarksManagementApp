@@ -15,5 +15,6 @@ public interface ISemesterService {
 	public SemesterDetails getSemesterById(Integer id);
 	
 	public void updateSemester(Integer id, SemesterDetails updatedDetails);
-
+	
+	public void deleteSemester(Integer semNo);
 }

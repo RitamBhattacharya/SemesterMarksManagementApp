@@ -2,26 +2,38 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
     <title>Semester Details</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
     <style>
+        /* Background with Gradient */
         body {
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px;
         }
 
+        /* Glassmorphic Card */
         .form-container {
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 450px;
+            color: white;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .form-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
         }
 
         .form-header {
@@ -31,82 +43,143 @@
 
         .form-header h3 {
             font-weight: bold;
-            color: #6a11cb;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
         }
 
         .form-header i {
-            color: #2575fc;
-            font-size: 30px;
+            font-size: 42px;
+            color: #ffdd57;
+        }
+
+        /* Input Fields */
+        .form-control {
+            border-radius: 10px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.3);
+            outline: none;
+            border: 1px solid #ffdd57;
+            color: white;
+            box-shadow: 0 0 10px rgba(255, 221, 87, 0.5);
+        }
+
+        label {
+            font-weight: bold;
+            color: #ffdd57;
+        }
+
+        /* Buttons */
+        .btn-primary, .btn-secondary {
+            width: 48%;
+            padding: 12px;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: all 0.3s ease-in-out;
         }
 
         .btn-primary {
-            background: #6a11cb;
+            background: #ffdd57;
+            color: black;
             border: none;
         }
 
         .btn-primary:hover {
-            background: #2575fc;
+            background: #fcb045;
+            box-shadow: 0 0 15px rgba(255, 221, 87, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 1px solid white;
         }
 
         .btn-secondary:hover {
-            background: #6c757d;
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Links */
+        .links {
+            text-align: center;
+            margin-top: 20px;
         }
 
         .links a {
-            color: #6a11cb;
+            color: #ffdd57;
             text-decoration: none;
-            transition: color 0.3s;
+            font-weight: bold;
+            margin: 0 10px;
+            transition: color 0.3s, text-shadow 0.3s;
         }
 
         .links a:hover {
-            color: #2575fc;
+            color: white;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
         }
+
     </style>
 </head>
 
 <body>
-    <div class="container form-container">
+    <div class="form-container">
         <div class="form-header">
             <i class="bi bi-pencil-square"></i>
-            <h3>Semester Details Form</h3>
+            <h3>📚 Semester Details</h3>
         </div>
+
         <form method="POST" th:action="@{/save}" th:object="${semdata}">
             <!-- Semester Number -->
             <div class="mb-3">
-                <label for="semNo" class="form-label">Enter Semester Number:</label>
-                <input type="number" id="semNo" name="semNo" class="form-control" required />
+                <label for="semNo">📖 Semester Number</label>
+                <input type="number" id="semNo" name="semNo" class="form-control" placeholder="Enter semester number" required />
             </div>
+
             <!-- Theory Papers -->
             <div class="mb-3">
-                <label for="noOfTheoryPaper" class="form-label">Enter the number of theory papers:</label>
-                <input type="number" id="noOfTheoryPaper" name="noOfTheoryPaper" class="form-control" required />
+                <label for="noOfTheoryPaper">📘 Number of Theory Papers</label>
+                <input type="number" id="noOfTheoryPaper" name="noOfTheoryPaper" class="form-control" placeholder="Enter theory papers count" required />
             </div>
+
             <!-- Practical Papers -->
             <div class="mb-3">
-                <label for="noOfPracticalPaper" class="form-label">Enter the number of practical papers:</label>
-                <input type="number" id="noOfPracticalPaper" name="noOfPracticalPaper" class="form-control" required />
+                <label for="noOfPracticalPaper">🔬 Number of Practical Papers</label>
+                <input type="number" id="noOfPracticalPaper" name="noOfPracticalPaper" class="form-control" placeholder="Enter practical papers count" required />
             </div>
+
             <!-- SGPA -->
             <div class="mb-3">
-                <label for="sgpa" class="form-label">Enter your SGPA:</label>
-                <input type="number" id="sgpa" name="sgpa" class="form-control" required />
+                <label for="sgpa">🎯 SGPA</label>
+                <input type="number" id="sgpa" name="sgpa" class="form-control" placeholder="Enter your SGPA" step="0.01" required />
             </div>
+
             <!-- Buttons -->
             <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-primary w-45"><i class="bi bi-save"></i> Save</button>
-                <button type="reset" class="btn btn-secondary w-45"><i class="bi bi-arrow-counterclockwise"></i> Reset</button>
+                <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Save</button>
+                <button type="reset" class="btn btn-secondary"><i class="bi bi-arrow-counterclockwise"></i> Reset</button>
             </div>
         </form>
+
         <!-- Links -->
-        <div class="links text-center mt-4">
-            <a href="/detailed-report" class="me-3">📄 Get Detailed Report</a>
+        <div class="links">
+            <a href="/detailed-report">📄 Get Detailed Report</a>
             <a href="/show-result">🎓 Check Your Result</a>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
